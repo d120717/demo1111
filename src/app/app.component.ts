@@ -9,8 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'callapi';
-  posts = [];
-  apiSource = this.http.get('https://jsonplaceholder.typicode.com/posts').pipe(
+  posts = this.http.get('https://jsonplaceholder.typicode.com/posts').pipe(
     map((posts: any[]) => {
       return posts.map((post: any) => {
         return { id: post.id, title: post.title };
@@ -18,10 +17,4 @@ export class AppComponent {
     }),
   );
   constructor(private http: HttpClient) {}
-
-  loaddata() {
-    this.apiSource.subscribe(data => {
-      this.posts = data;
-    });
-  }
 }
